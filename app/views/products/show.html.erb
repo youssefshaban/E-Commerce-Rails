@@ -20,6 +20,8 @@
   <%= @product.description %>
 </p>
 
+
+
 <% @product.ProductAttachment.each do |image| %>
    <%= image_tag "#{image.photo}" %>
  <% end %>

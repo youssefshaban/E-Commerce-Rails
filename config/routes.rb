@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :stores
+  devise_for :sellers
   devise_for :admins
   resources :product_attachments
   resources :products

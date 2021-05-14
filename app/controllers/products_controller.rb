@@ -3,8 +3,8 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
-    @admin = current_admin
+    @products = Product.where(store_id: current_seller.store_id)
+    # @admin = current_seller
   end
 
   # GET /products/1 or /products/1.json
@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/new
+  before_action :authenticate_seller!, :check_for_store_id , only: :new
   def new
     @product = Product.new
     @product_attachments = @product.ProductAttachment.build
@@ -23,20 +24,22 @@ class ProductsController < ApplicationController
   end
 
   # POST /products or /products.json
+
   def create
-    @product = Product.new(product_params)
-    respond_to do |format|
-      if @product.save
-        params[:product_attachments]['photos'].each do |a|
-              @product_attachments = @product.ProductAttachment.create!(:photo => a,     :product_id => @product.id)
+      @product = Product.new(product_params)
+      @product.store_id = current_seller.store_id
+      respond_to do |format|
+        if @product.save
+          params[:product_attachments]['photos'].each do |a|
+                @product_attachments = @product.ProductAttachment.create!(:photo => a,     :product_id => @product.id)
+          end
+          format.html { redirect_to @product, notice: "Product was successfully created." }
+          format.json { render :show, status: :created, location: @product }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
         end
-        format.html { redirect_to @product, notice: "Product was successfully created." }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # PATCH/PUT /products/1 or /products/1.json
@@ -61,6 +64,17 @@ class ProductsController < ApplicationController
     end
   end
 
+
+  private 
+  def check_for_store_id
+        puts "HEL:LLLLLOOO"
+        puts current_seller.store_id.nil?
+        if @current_seller.store_id.nil?
+          redirect_to products_url , notice: "You Dont own a store"
+          return
+        end
+        # redirect_to products_url, notice: "You Dont own a store" unless current_seller.store_id.blank?
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
