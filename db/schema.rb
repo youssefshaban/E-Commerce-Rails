@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_181441) do
+ActiveRecord::Schema.define(version: 2021_05_14_194748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,16 +48,20 @@ ActiveRecord::Schema.define(version: 2021_05_14_181441) do
   end
 
   create_table "cart_carries", force: :cascade do |t|
-    t.integer "cart_id"
-    t.integer "product_id"
+    t.bigint "cart_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity"
+    t.index ["cart_id"], name: "index_cart_carries_on_cart_id"
+    t.index ["product_id"], name: "index_cart_carries_on_product_id"
   end
 
   create_table "carts", force: :cascade do |t|
-    t.integer "buyer_id"
+    t.bigint "buyer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_carts_on_buyer_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -67,8 +71,6 @@ ActiveRecord::Schema.define(version: 2021_05_14_181441) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.integer "order_id"
-    t.integer "product_id"
     t.string "state"
     t.integer "rate"
     t.text "review"
@@ -77,13 +79,18 @@ ActiveRecord::Schema.define(version: 2021_05_14_181441) do
     t.datetime "deliveredDate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "order_id"
+    t.bigint "product_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.string "state"
-    t.integer "buyer_id"
+    t.bigint "buyer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_orders_on_buyer_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -94,10 +101,11 @@ ActiveRecord::Schema.define(version: 2021_05_14_181441) do
   end
 
   create_table "product_attachments", force: :cascade do |t|
-    t.integer "product_id"
+    t.bigint "product_id"
     t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_attachments_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -107,7 +115,12 @@ ActiveRecord::Schema.define(version: 2021_05_14_181441) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "store_id"
+    t.bigint "store_id"
+    t.bigint "brand_id"
+    t.bigint "category_id"
+    t.index ["brand_id"], name: "index_products_on_brand_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["store_id"], name: "index_products_on_store_id"
   end
 
   create_table "sellers", force: :cascade do |t|
@@ -119,9 +132,10 @@ ActiveRecord::Schema.define(version: 2021_05_14_181441) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.integer "store_id"
+    t.bigint "store_id"
     t.index ["email"], name: "index_sellers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_sellers_on_reset_password_token", unique: true
+    t.index ["store_id"], name: "index_sellers_on_store_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -131,4 +145,15 @@ ActiveRecord::Schema.define(version: 2021_05_14_181441) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "cart_carries", "carts"
+  add_foreign_key "cart_carries", "products"
+  add_foreign_key "carts", "buyers"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "buyers"
+  add_foreign_key "product_attachments", "products"
+  add_foreign_key "products", "brands"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "stores"
+  add_foreign_key "sellers", "stores"
 end

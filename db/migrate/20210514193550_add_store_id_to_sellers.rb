@@ -1,5 +1,5 @@
 class AddStoreIdToSellers < ActiveRecord::Migration[5.2]
   def change
-    add_column :sellers, :store_id, :integer
+    add_reference :sellers, :store, foreign_key: true
   end
 end
