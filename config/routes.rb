@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :orders
+  resources :carts
+  devise_for :buyers
   resources :stores
   devise_for :sellers
   devise_for :admins

@@ -1,0 +1,2 @@
+class CartCarry < ApplicationRecord
+end
