@@ -56,6 +56,7 @@ class ProductsController < ApplicationController
   end
 
   # DELETE /products/1 or /products/1.json
+  
   def destroy
     @product.destroy
     respond_to do |format|
@@ -73,7 +74,6 @@ class ProductsController < ApplicationController
           redirect_to products_url , notice: "You Dont own a store"
           return
         end
-        # redirect_to products_url, notice: "You Dont own a store" unless current_seller.store_id.blank?
   end
   private
     # Use callbacks to share common setup or constraints between actions.
