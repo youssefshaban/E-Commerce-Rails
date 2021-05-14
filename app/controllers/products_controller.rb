@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.where(store_id: current_seller.store_id)
+    @products = Product.all
     # @admin = current_seller
   end
 

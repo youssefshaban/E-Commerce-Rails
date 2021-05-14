@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'products#index'
   resources :orders
   resources :carts
   devise_for :buyers
