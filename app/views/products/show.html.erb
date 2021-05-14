@@ -20,6 +20,16 @@
   <%= @product.description %>
 </p>
 
+<p>
+  <strong>Brand:</strong>
+  <%= Brand.find_by(id:@product.brand_id ).name%>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= Category.find_by(id:@product.category_id).name %>
+</p>
+
 
 
 <% @product.ProductAttachment.each do |image| %>
