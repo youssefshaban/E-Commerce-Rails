@@ -31,6 +31,13 @@
     <%= form.text_area :description %>
   </div>
 
+    <%= form.fields_for :product_attachments do |p| %>
+         <div class="field">
+           <%= p.label :photos %><br>
+           <%= p.file_field :photos, :multiple => true, name:     "product_attachments[photos][]" %>
+         </div>
+       <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>
