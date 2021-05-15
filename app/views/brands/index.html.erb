@@ -14,9 +14,9 @@
     <% @brands.each do |brand| %>
       <tr>
         <td><%= brand.name %></td>
-        <td><%= link_to 'Show', brand %></td>
-        <td><%= link_to 'Edit', edit_brand_path(brand) %></td>
-        <td><%= link_to 'Destroy', brand, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', brand , class: 'btn btn-outline-primary' %></td>
+        <td><%= link_to 'Edit', edit_brand_path(brand) ,class: 'btn btn-outline-primary' %></td>
+        <td><%= link_to 'Destroy', brand, method: :delete, data: { confirm: 'Are you sure?' } ,class: 'btn btn-outline-primary' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Brand', new_brand_path %>
+<%= link_to 'New Brand', new_brand_path ,class: 'btn btn-outline-primary' %>
