@@ -1,4 +1,5 @@
 class ProductAttachmentsController < ApplicationController
+  before_action :authenticate_seller!, except: %i[index show]
   before_action :set_product_attachment, only: %i[ show edit update destroy ]
 
   # GET /product_attachments or /product_attachments.json
