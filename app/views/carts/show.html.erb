@@ -1,9 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Buyer:</strong>
-  <%= @cart.buyer_id %>
-</p>
 
-<%= link_to 'Edit', edit_cart_path(@cart) %> |
+
+   <% @entries.each do |item|%>
+  <div>
+      <%= Product.find_by(id:item.product_id).name %>    
+      <%= item.quantity %>
+      <%= link_to 'Edit', new_cart_path(:product => item.product_id, :quantity=>item.quantity) %> 
+ </div>
+   <% end %>
+
+
+|
+<%= link_to 'Checkout', products_path %>
 <%= link_to 'Back', carts_path %>

@@ -1,4 +1,20 @@
-<h1>New Cart</h1>
+<h1>ADD TO CART</h1>
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @p.name %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @p.quantity %>
+</p>
+
+<p>
+  <strong>Currentprice:</strong>
+  <%= @p.currentPrice %>
+</p>
 
 <%= render 'form', cart: @cart %>
 

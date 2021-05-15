@@ -37,5 +37,7 @@
  <% end %>
 
 
+<%= link_to 'Add To Cart', new_cart_path(:product => @product.id) %> |
+
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

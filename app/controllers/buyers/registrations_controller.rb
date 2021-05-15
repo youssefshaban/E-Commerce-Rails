@@ -12,12 +12,12 @@ class Buyers::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |resource|
-      puts "HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
+      # puts "HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
       puts resource.id
       cart = Cart.create
       cart.buyer_id = resource.id
       cart.save
-      puts "DONNNEEEEEEEEEEEEEEEEEEEEE"
+      # puts "DONNNEEEEEEEEEEEEEEEEEEEEE"
     end
   end
 
