@@ -1,6 +1,12 @@
 <h1>ADD TO CART</h1>
 
 
+<% flash.each do |key, value| %>
+    <div class="flash <%= key %>"><%= value %></div>
+<% end %>
+
+
+
 <p>
   <strong>Name:</strong>
   <%= @p.name %>

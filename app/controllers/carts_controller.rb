@@ -50,7 +50,6 @@ class CartsController < ApplicationController
 
   # PATCH/PUT /carts/1 or /carts/1.json
   def update
-    puts "I AM HEEEERE"
     @first_value = session[:passed_variable] 
     @get_value = @first_value
     @p = Product.find_by(id:@get_value)
@@ -59,32 +58,33 @@ class CartsController < ApplicationController
 
     puts @p.name 
     puts cart_params["quantity"]
-    puts "I AM HEEEERE"
-    
+
     
     if cart_params["quantity"].to_i > @p.quantity
       puts "LAAAAAAAAAAAAAA"
-      flash.now[:error] = "please fix the problems in the record"
+       flash.now[:danger] = "You cannot order more than the product's quantity"
+       render :new
+
     else
         @cart = Cart.find_by(buyer_id:current_buyer.id)
         @editing_Quantity = session[:edited_Quantity]
-        
+        puts "FOUND CART"
+
         if @editing_Quantity != nil
           @entry = CartCarry.find_by(cart_id:@cart.id , product_id:@p.id)
-          
-          if @entry != nil
-            @entry.quantity = cart_params["quantity"]
-            @entry.save
-          
-          else
-            @entry = CartCarry.create(cart_id:@cart.id,product_id:@p.id,quantity: cart_params["quantity"].to_i)
-            Rails.logger.info(@entry.errors.inspect) 
-            puts "AYWAAAAAAAAAAAA"
-        
-          end
-        
+          puts "Cart Carry"
+          puts "EDITING"
+          @entry.quantity = cart_params["quantity"]
+          @entry.save
+          session[:edited_Quantity] = nil
+        else
+          puts "ADDING"
+          @entry = CartCarry.create(cart_id:@cart.id,product_id:@p.id,quantity: cart_params["quantity"].to_i)
+          Rails.logger.info(@entry.errors.inspect)     
         end
-        redirect_to cart_path
+         respond_to do |format|
+           format.html { redirect_to cart_path, notice: "Product added to cart" }
+         end
     end
 
 
@@ -114,7 +114,9 @@ class CartsController < ApplicationController
           return
         end
       end
+
       @order = Order.create(state: "Pending", buyer_id:current_buyer.id)
+      
       @items.each do |item|
         @store = Store.find_by(id: @product_for_this_item.store_id)
         @seller = Seller.find_by(store_id: @store.id)
@@ -122,6 +124,9 @@ class CartsController < ApplicationController
          order_id: @order.id, product_id: item.product_id, seller_id:@seller.id,quantity:item.quantity)
         item.destroy
       end
+    end
+    respond_to do |format|
+        format.html { redirect_to cart_path(:id => Cart.find_by(buyer_id:current_buyer.id).id), notice: "Checked Out" }
     end
 
   end
