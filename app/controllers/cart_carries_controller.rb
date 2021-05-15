@@ -47,6 +47,12 @@ class CartCarriesController < ApplicationController
     end
   end
 
+
+  
+  def checkout
+    puts "CHECKED OUT CART CARRIES"
+
+  end
   # DELETE /cart_carries/1 or /cart_carries/1.json
   def destroy
     puts "HEEElooo"

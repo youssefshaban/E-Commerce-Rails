@@ -12,7 +12,12 @@ Rails.application.routes.draw do
   resources :products
   resources :brands
   resources :cart_carry, :controller => "cart_carries"
-
   resources :categories
+
+
+
+
+
+  match 'cart/checkout' => 'carts#checkout',:via => [:post], :as => 'cart_checkout'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

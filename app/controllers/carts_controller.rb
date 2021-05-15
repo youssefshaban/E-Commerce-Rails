@@ -100,6 +100,12 @@ class CartsController < ApplicationController
     # end
   end
 
+
+  def checkout
+    puts "CHECKED OUT"
+
+  end
+
   # DELETE /carts/1 or /carts/1.json
   def destroy
     @cart.destroy
