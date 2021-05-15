@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/new
-  before_action :authenticate_seller!, :check_for_store_id , only: :new
+  # before_action :authenticate_seller!, :check_for_store_id , only: :new
   def new
     @product = Product.new
     @product_attachments = @product.ProductAttachment.build
