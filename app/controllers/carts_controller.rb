@@ -68,14 +68,21 @@ class CartsController < ApplicationController
     else
         @cart = Cart.find_by(buyer_id:current_buyer.id)
         @editing_Quantity = session[:edited_Quantity]
+        
         if @editing_Quantity != nil
           @entry = CartCarry.find_by(cart_id:@cart.id , product_id:@p.id)
-          @entry.quantity = cart_params["quantity"].to_i
-          @entry.save
-        else
-          @entry = CartCarry.create(cart_id:@cart.id,product_id:@p.id,quantity: cart_params["quantity"].to_i)
-          Rails.logger.info(@entry.errors.inspect) 
-          puts "AYWAAAAAAAAAAAA"
+          
+          if @entry != nil
+            @entry.quantity = cart_params["quantity"]
+            @entry.save
+          
+          else
+            @entry = CartCarry.create(cart_id:@cart.id,product_id:@p.id,quantity: cart_params["quantity"].to_i)
+            Rails.logger.info(@entry.errors.inspect) 
+            puts "AYWAAAAAAAAAAAA"
+        
+          end
+        
         end
         redirect_to cart_path
     end
@@ -105,7 +112,7 @@ class CartsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cart
-      @cart = Cart.find(params[:id])
+      @cart = Cart.find_by(buyer_id:current_buyer.id)
     end
 
     # Only allow a list of trusted parameters through.

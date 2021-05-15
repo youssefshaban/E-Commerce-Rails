@@ -1,0 +1,17 @@
+<%= form_with(model: cart_carry, local: true) do |form| %>
+  <% if cart_carry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cart_carry.errors.count, "error") %> prohibited this cart_carry from being saved:</h2>
+
+      <ul>
+      <% cart_carry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
