@@ -11,8 +11,10 @@ class CartsController < ApplicationController
   def show
     @cart = Cart.find_by(buyer_id:current_buyer.id)
     @entries = CartCarry.where(cart_id:@cart.id)
-    # puts @entries
-
+    @TotalPrice = 0
+    @entries.each do |item|
+     @TotalPrice += Product.find_by(id:item.product_id).currentPrice * item.quantity
+    end
   end
 
   # GET /carts/new
