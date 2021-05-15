@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root 'products#index'
+  devise_for :buyers, controllers: { registrations: 'buyers/registrations' }
+  # devise_for :buyers, controllers: { registration: 'buyers/registrations' }
   resources :orders
   resources :carts
-  devise_for :buyers
+  # devise_for :buyers
   resources :stores
   devise_for :sellers
   devise_for :admins
