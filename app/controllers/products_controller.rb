@@ -67,6 +67,9 @@ class ProductsController < ApplicationController
     end
   end
 
+  def myproducts
+    @myProducts = Product.where("store_id=#{current_seller.store_id}")
+  end
 
   private 
   def check_for_store_id
