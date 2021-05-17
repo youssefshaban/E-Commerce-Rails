@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+    paginates_per 3
+
     has_many :ProductAttachment
     accepts_nested_attributes_for :ProductAttachment
     

@@ -10,6 +10,7 @@
           <%= link_to 'Home', products_path, class: "nav-link" %>
         </li>
         <% if seller_signed_in? %>
+          <li><%= link_to "My Products", products_myproducts_path, class: "nav-link" %></li>
           <li><%= link_to "Log out", destroy_seller_session_path, class: "nav-link", method: :delete %></li>
         <% elsif admin_signed_in? %>
           <li><%= link_to "Add Brand", new_brand_path, class: "nav-link" %></li>
@@ -17,7 +18,7 @@
           <li><%= link_to "Add Store", new_store_path, class: "nav-link" %></li>
           <li><%= link_to "Log out", destroy_admin_session_path, class: "nav-link", method: :delete %></li>
         <% elsif buyer_signed_in? %>
-          <%# <li><%= link_to "My Cart", cart_path(:id => Cart.find_by(buyer_id:current_buyer.id).id), class: "nav-link" %></li> %>
+          <li><%= link_to "My Cart", cart_path(:id => Cart.find_by(buyer_id:current_buyer.id).id), class: "nav-link" %></li>
           <li><%= link_to "Log out", destroy_buyer_session_path, class: "nav-link", method: :delete %></li>
 
 

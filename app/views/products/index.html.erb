@@ -58,8 +58,8 @@
                   Seller
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <% Seller.all.each do |seller| %>
-                    <li><%= link_to seller.name, root_path(category: seller.id), class: "dropdown-item" %></li>
+                  <% Store.all.each do |store| %>
+                    <li><%= link_to store.name, root_path(store: store.id), class: "dropdown-item" %></li>
                   <% end %>
                 </ul>
               </div>
@@ -74,8 +74,9 @@
               <%= text_field_tag(:maxprice, params[:maxprice]) %>
       <% end %>
   </div>
+    
+    
     <br>
-
     <br>
 
 
@@ -92,19 +93,29 @@
                     <%= image_tag "#{image.photo}" %>
                 <% end %>
               <div class="card-body">
-                <h5 class="card-title"><%= product.name %></h5><br>
-                <h6 class="card-subtitle mb-2 "> <span style="color: #004d99;">quantity:</span> <%= product.quantity %></h6>
-                <h6 class="card-subtitle mb-2"><span style="color: #004d99;">price:</span> <%= product.currentPrice %></h6>
-                <span style="color: #004d99;">Description:</span>
-                <p class="card-text "> <%= product.description %></p>
+                <h5 class="card-title mb-3"><%= product.name %></h5>
+                <h6 class="card-subtitle mb-2 "> <span style="color: #004d99;font-size: 20px;font-weight: bold;">Category:</span> <%= Category.find(product.category_id).name %></h6>
+                <h6 class="card-subtitle mb-2 "> <span style="color: #004d99;font-size: 20px;font-weight: bold;">Brand:</span> <%= Brand.find(product.brand_id).name %></h6>
+                <h6 class="card-subtitle mb-2 "> <span style="color: #004d99;font-weight: bold;">quantity:</span> <%= product.quantity %></h6>
+                <h6 class="card-subtitle mb-2"><span style="color: #004d99;font-weight: bold;">price:</span> <%= product.currentPrice %></h6>
+                <span style="color: #004d99;font-size: 25px;">Description:</span>
+                <p class="card-text" style="font-size: 20px;"> <%= product.description %></p>
                 <button class="btn btn-secondary"><%= link_to 'Show item', product, style: "color: white; text-decoration: none;"  %></button>
               </div>
             </div>
           </div>
       <% end %>
+
 </div>
+
+
+<%=  paginate @products%>
 
 <br>
 
+<% if seller_signed_in?%>
+
 <%= link_to 'New Product', new_product_path %>
+
+<% end %>
 
