@@ -13,18 +13,20 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: 'form-control'  %>
   </div>
 
   <div class="field">
     <%= form.label :summary %>
-    <%= form.text_area :summary %>
+    <%= form.text_area :summary, class: 'form-control'  %>
   </div>
 
-
-<%= form.collection_select :seller_id, Seller.where(store_id: nil), :id, :email, include_blank: true %>
-
+<br />
+<div class="field">
+<%= form.label :Store_Admin %>
+<%= form.collection_select :seller_id, Seller.where(store_id: nil), :id, :email, include_blank: true, class: 'form-select'  %>
+</div>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :button_to , value: 'New', class: 'btn btn-outline-primary float-end'%>
   </div>
 <% end %>

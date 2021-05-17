@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
-
+<%= link_to 'New Store', new_store_path ,class: 'btn btn-outline-success float-end m-1' %>
 <h1>Stores</h1>
 
-<table>
+<table class="table table-dark table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -16,9 +16,9 @@
       <tr>
         <td><%= store.name %></td>
         <td><%= store.summary %></td>
-        <td><%= link_to 'Show', store %></td>
-        <td><%= link_to 'Edit', edit_store_path(store) %></td>
-        <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', store , class: 'btn btn-outline-info' %></td>
+        <td ><%= link_to 'Edit', edit_store_path(store),class: 'btn btn-outline-warning' %></td>
+        <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } ,class: 'btn btn-outline-danger' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Store', new_store_path %>
+
