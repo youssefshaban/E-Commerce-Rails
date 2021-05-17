@@ -1,9 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Buyer:</strong>
-  <%= @cart.buyer_id %>
-</p>
 
-<%= link_to 'Edit', edit_cart_path(@cart) %> |
-<%= link_to 'Back', carts_path %>
+ <% if @entries.count != 0 %>
+ <h1 class="fs-3 fw-bold ">Total Price:   <%=@TotalPrice%></h1>
+<table class="table text-white">
+  <thead><th>Product Name</th><th>Quantity</th><th>Price</th><th>Change Quantity</th><th>Remove From cart</th></thead>
+  <tbody>
+
+     <% @entries.each do |item|%>
+      <tr>
+        <td> <%=link_to Product.find_by(id:item.product_id).name, product_path(:id => item.product_id) ,class: 'fs-3 fw-bold' %>  </td>
+        <td class="fs-3 fw-bold "> <%= item.quantity%> </td>
+        <td class="fs-3 fw-bold "> <%= Product.find_by(id:item.product_id).currentPrice * item.quantity%> </td>
+        <td> <%= link_to 'Edit Quantity', new_cart_path(:product => item.product_id, :quantity=>item.quantity), class: 'btn btn-outline-success' %> </td>
+        <td><%= link_to 'Remove Item', item ,method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-outline-danger' %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+    <%= link_to 'Checkout',cart_checkout_path , method: :post , class: 'btn btn-outline-primary m-4'%>
+
+<% else %>
+<h1>WOW such empty</h1>
+
+ <% end %>
+
+<%= link_to 'Back', root_path , class: 'btn btn-outline-primary' %>
