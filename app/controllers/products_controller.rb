@@ -4,7 +4,29 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+
+    
+    if params[:category]
+      @products = Product.cat(params[:category])
+    elsif params[:brand]
+      @products = Product.brand(params[:brand])
+    elsif params[:seller]
+      @products = Product.seller(params[:seller])
+    elsif params[:minprice] || params[:maxprice]
+      #@products = Product.price(params[:minprice],params[:maxprice])
+      @products = Product.where('currentPrice > 20')
+      puts 'hy'
+      #Product.price(params[:price])
+    else
+      @products = Product.search(params[:search])
+    end
+    
+    # @products = Product.where("category_id = 3")
+
+    # puts params[:name]
+    
+    
+    #@products = Product.all
 
     # @admin = current_seller
   end
