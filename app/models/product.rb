@@ -61,7 +61,7 @@ class Product < ApplicationRecord
 
     def self.price(min,max)
         
-            Product.where("currentPrice >= ? or currentPrice <= ? ", "#{min}", "#{max}")
+            Product.where(currentPrice: min..max)
         
     end
 

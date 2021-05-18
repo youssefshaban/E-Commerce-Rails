@@ -12,16 +12,24 @@
         
           <%= form_tag(products_path, method: :get) do %>
             
-              <%= text_field_tag(:search, params[:search]) %>
-              <%= submit_tag("Search products", :name => nil, style: "color: black;") %>
-          
+
+            <div class="input-group mb-3 w-75">
+              <%= submit_tag("Search products", :name => nil, style: "color: black;", class:"btn btn-primary",style: "color: white;") %>
+              <%= text_field_tag(:search, params[:search],class:"form-control ",style: "background-color: white;width: 50px;") %>
+            </div>
+              
+
+              
           <% end %>
 
           <br>
 
 
     <h2> Filter by <h2>
+<div class="container">
+  <div class="row row-cols-auto ">
 
+<div class="col">
     <div class ="btn-group">
 
               <div class="dropdown">
@@ -36,8 +44,9 @@
               </div>
 
     </div>
+  </div>
 
-
+<div class="col">
     <div class ="btn-group">
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,7 +60,10 @@
             </div>
 
     </div>
+</div>
 
+
+<div class="col d-inline">
     <div class ="btn-group">
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,15 +78,31 @@
 
 
     </div>
+</div>
 
-  <div class="btn-group">
+  <div class="col col-lg-4">
+  </div>
+  
+  
+<div class="col">
+   
      <%= form_tag(products_path, method: :get) do %> 
-              <%= submit_tag("Price Range", :name => nil, style: "color: black;") %>   
-              <%= text_field_tag(:minprice, params[:minprice]) %> : 
-              <%= text_field_tag(:maxprice, params[:maxprice]) %>
+     
+              
+              <%= submit_tag("Price Range", :name => nil, style: "color: white;",class: "btn btn-secondary") %>   
+              <%= text_field_tag(:minprice, params[:minprice],class:"form-control d-inline-block",style: "background-color: white;width: 100px; color:black;") %> :
+              <%= text_field_tag(:maxprice, params[:maxprice],class:"form-control d-inline-block",style: "background-color: white;width: 100px; color:black;") %> 
+
       <% end %>
+
+</div>
+
+
+</div>
   </div>
     
+<br>
+
     
     <br>
     <br>
@@ -89,9 +117,7 @@
     <% @products.each do |product| %>
         <div class="col mb-4">
           <div class="card bg-dark h-100" style="width: 18rem;">
-                <% product.ProductAttachment.each do |image| %>
-                    <%= image_tag "#{image.photo}" %>
-                <% end %>
+               <%= image_tag "#{product.ProductAttachment.first.photo}",class:"card-img-top h-50" %>
               <div class="card-body">
                 <h5 class="card-title mb-3"><%= product.name %></h5>
                 <h6 class="card-subtitle mb-2 "> <span style="color: #004d99;font-size: 20px;font-weight: bold;">Category:</span> <%= Category.find(product.category_id).name %></h6>

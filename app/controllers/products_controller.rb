@@ -13,8 +13,8 @@ class ProductsController < ApplicationController
     elsif params[:store]
       @products = Product.seller(params[:store]).order(:created_at).page(params[:page])
     elsif params[:minprice] || params[:maxprice]
-      #@products = Product.price(params[:minprice],params[:maxprice])
-      @products = Product.where('currentPrice > 20')
+      @products = Product.price(params[:minprice],params[:maxprice]).order(:currentPrice).page(params[:page])
+      #@products = Product.where(currentPrice:  0..2000)
       puts 'hy'
       #Product.price(params[:price])
     else
