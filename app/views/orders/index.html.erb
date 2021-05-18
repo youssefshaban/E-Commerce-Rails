@@ -16,15 +16,8 @@
       <tr>
         <td><%= order.state %></td>
         <td><%= order.buyer_id %></td>
-<<<<<<< HEAD
         <td><%= link_to 'Show', order %></td>
         </tr>
-=======
-        <td><%= link_to 'Show', order, class: 'btn btn-outline-info' %></td>
-        <td><%= link_to 'Edit', edit_order_path(order),class: 'btn btn-outline-warning' %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } ,class: 'btn btn-outline-danger' %></td>
-      </tr>
->>>>>>> eb7c4f7d21e785a4d38698e38a874c98440c70d7
     <% end %>
   </tbody>
 </table>
