@@ -16,11 +16,18 @@
 #
 default: &default
   adapter: postgresql
+<<<<<<< HEAD
   encoding: utf8
   username: youssefshaban
   password:
   host: ''
   port: 5432
+=======
+  encoding: unicode
+  username: postgres
+  password: postgre943
+  host: localhost
+>>>>>>> eb7c4f7d21e785a4d38698e38a874c98440c70d7
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -28,6 +35,10 @@ default: &default
 development:
   <<: *default
   database: ecommerce_development
+  host: localhost
+  port: 5432
+  username: karim123
+  password: karim123
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -62,6 +73,10 @@ development:
 test:
   <<: *default
   database: ecommerce_test
+  host: localhost
+  port: 5432
+  username: karim123
+  password: karim123
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

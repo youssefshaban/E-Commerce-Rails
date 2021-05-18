@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :stores
   devise_for :sellers
   devise_for :admins
+  get 'products/myproducts'
   resources :product_attachments
   resources :products
   resources :brands

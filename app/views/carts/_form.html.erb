@@ -13,10 +13,10 @@
 
   <div class="field">
     <%= form.label :quantity %>
-    <%= form.number_field :quantity %>
+    <%= form.number_field :quantity , class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :button_to , value: 'New', class: 'btn btn-outline-primary float-end' %>
   </div>
 <% end %>

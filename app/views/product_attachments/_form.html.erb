@@ -13,15 +13,15 @@
 
   <div class="field">
     <%= form.label :product_id %>
-    <%= form.number_field :product_id %>
+    <%= form.number_field :product_id , class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :photo %>
-    <%= form.text_field :photo %>
+    <%= form.text_field :photo , class: 'form-control'%>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :button_to , value: 'New', class: 'btn btn-outline-primary float-end' %>
   </div>
 <% end %>

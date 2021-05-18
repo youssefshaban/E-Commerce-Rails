@@ -13,32 +13,32 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :quantity %>
-    <%= form.number_field :quantity %>
+    <%= form.number_field :quantity, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :currentPrice %>
-    <%= form.text_field :currentPrice %>
+    <%= form.text_field :currentPrice, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: 'form-control' %>
   </div>
-
+<br />
 <div class="field">
 <%= form.label :Brand %>
-  <%= form.collection_select :brand_id, Brand.all, :id, :name, include_blank: true %>
+  <%= form.collection_select :brand_id, Brand.all, :id, :name, include_blank: true, class: 'form-select' %>
   </div>
-
+<br />
   <div class="field">
   <%= form.label :Category %>
-  <%= form.collection_select :category_id, Category.all, :id, :name, include_blank: true %>
+  <%= form.collection_select :category_id, Category.all, :id, :name, include_blank: true, class: 'form-select'  %>
   </div>
 
 
@@ -48,8 +48,8 @@
            <%= p.file_field :photos, :multiple => true, name:     "product_attachments[photos][]" %>
          </div>
        <% end %>
-
+<br />
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :button_to , value: 'New', class: 'btn btn-outline-primary float-end' %>
   </div>
 <% end %>
