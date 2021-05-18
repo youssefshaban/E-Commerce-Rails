@@ -9,6 +9,23 @@
   <strong>Buyer:</strong>
   <%= @order.buyer_id %>
 </p>
+<tbody>
+<strong>Product name:</strong>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
+
+<% @items.each do |item| puts item %>
+
+  <tr>
+    <td><%= item.name%></td>
+    </tr>
+<% end %>
+<% @order.OrderItems.each do |item| %>
+
+  <tr>
+    <td><%= item.state%></td>
+    </tr>
+<% end %>
+</tbody>
+<br/>
+
 <%= link_to 'Back', orders_path %>

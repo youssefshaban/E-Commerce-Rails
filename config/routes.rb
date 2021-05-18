@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   resources :brands
   resources :cart_carry, :controller => "cart_carries"
   resources :categories
+  get 'order/seller', to: 'orders#seller' ,as:'sallerView'
+  post 'order/seller/accept/:id', to: 'orders#accept' ,as:'sallerAccept'
+  post 'order/seller/reject/:id', to: 'orders#reject' ,as:'sallerReject'
+
 
 
 

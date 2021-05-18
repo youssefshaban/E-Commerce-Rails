@@ -1,0 +1,22 @@
+<% @myOrders.each do |item| %>
+
+    <tr>
+      <td><%= item.id%></td>
+  
+      <td><%= item.state%></td>
+   
+      <td><%= item.updated_at %></td>
+    
+      <td><%= item.created_at %></td>
+      <td><%= link_to 'Show', item %></td>
+
+      <td><%= link_to 'Accept' ,sallerAccept_path(:id => item) ,method: :post%> </td>
+      <td><%= link_to 'Reject' ,sallerReject_path(:id => item) ,method: :post%> </td>
+
+   
+      </tr>
+
+
+  <% end %>
+  </tbody>
+  <br/>
