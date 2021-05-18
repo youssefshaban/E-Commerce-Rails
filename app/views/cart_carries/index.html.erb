@@ -2,7 +2,7 @@
 
 <h1>Cart Carries</h1>
 
-<table>
+<table class="table table-dark table-hover">
   <thead>
     <tr>
       <th colspan="3"></th>
@@ -12,9 +12,9 @@
   <tbody>
     <% @cart_carries.each do |cart_carry| %>
       <tr>
-        <td><%= link_to 'Show', cart_carry %></td>
-        <td><%= link_to 'Edit', edit_cart_carry_path(cart_carry) %></td>
-        <td><%= link_to 'Destroy', cart_carry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', cart_carry, class: 'btn btn-outline-info' %></td>
+        <td><%= link_to 'Edit', edit_cart_carry_path(cart_carry),class: 'btn btn-outline-warning' %></td>
+        <td><%= link_to 'Destroy', cart_carry, method: :delete, data: { confirm: 'Are you sure?' },class: 'btn btn-outline-danger' %></td>
       </tr>
     <% end %>
   </tbody>
