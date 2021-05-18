@@ -3,7 +3,9 @@
 <h1 class="mb-4 mt-4">My Products :</h1>
 
 <p id="notice"><%= notice %></p>
-
+<% if @myProducts.size == 0 %>
+  <h2>YOU DON'T HAVE ANY PRODUCTS YET</h2>
+<% else %>
 <table class="table table-dark">
   <thead>
     <tr>
@@ -31,6 +33,8 @@
     <% end %>
   </tbody>
 </table>
+
+<% end %>
 
 <br>
 

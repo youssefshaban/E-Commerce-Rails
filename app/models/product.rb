@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
     paginates_per 3
 
-    has_many :ProductAttachment
+    has_many :ProductAttachment, dependent: :destroy
     accepts_nested_attributes_for :ProductAttachment
     
     belongs_to :Store , optional: true
