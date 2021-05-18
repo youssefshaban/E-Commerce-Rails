@@ -7,7 +7,7 @@ one:
   description: MyText
 
 two:
-  name: MyString
+  name: MyString1
   quantity: 1
   currentPrice: 1.5
   description: MyText

@@ -28,15 +28,8 @@ default: &default
 development:
   <<: *default
   database: ecommerce_development
-<<<<<<< HEAD
   username: youssefshaban
   password: 
-=======
-  host: localhost
-  port: 5432
-  username: postgres
-  password: postgre943
->>>>>>> 70cb3fa640e3aa8d60abb3e3a65d36ba32782555
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -71,13 +64,6 @@ development:
 test:
   <<: *default
   database: ecommerce_test
-<<<<<<< HEAD
-=======
-  host: localhost
-  port: 5432
-  username: postgres
-  password: postgre943
->>>>>>> 70cb3fa640e3aa8d60abb3e3a65d36ba32782555
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
