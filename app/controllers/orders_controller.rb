@@ -3,13 +3,64 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    # if current_buyer.id != Nil
+      @orders = Order.where(buyer_id:current_buyer.id)
+    # else 
+    #   @orders = Order.where(buyer_id:current_buyer.id)
   end
 
   # GET /orders/1 or /orders/1.json
   def show
+    @items = Product.where(id:@order.OrderItems.ids)
   end
 
+# GET /oders/seller
+  def seller
+    @orders = Order.all
+    @myOrders = Array.new
+    @orders.each do |item|
+      # new array to save the seller orders 
+      @myOrderItems = Array.new
+
+       item.OrderItems.each do |i2|
+        puts i2.seller_id
+        puts current_seller.id
+        if i2.seller_id == current_seller.id
+        @myOrders.push(item)
+        end
+       end 
+  end
+
+   # @items = Product.where(id:@order.OrderItems.ids)
+  end
+  def accept 
+    puts "accept"
+    @OrderState = 1
+    @order = Order.find(params[:id])
+    @order.OrderItems.each do |i2|
+      if i2.seller_id == current_seller.id
+      i2.update(state:"accepted")
+      end
+      if i2.state != "accepted"
+        @OrderState = 0
+      end 
+     end 
+     # check if all orders accepted 
+     if @OrderState == 1
+    @order.update(state:"done")
+     end 
+  end
+  def reject 
+    # @items = Product.where(id:@order.OrderItems.ids)
+    puts "reject"
+    @order = Order.find(params[:id])
+    @order.OrderItems.each do |i2|
+      if i2.seller_id == current_seller.id
+      i2.update(state:"rejected")
+      end
+     end 
+    @order.update(state:"done")
+  end
   # GET /orders/new
   def new
     @order = Order.new

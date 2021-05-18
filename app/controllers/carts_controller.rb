@@ -108,24 +108,27 @@ class CartsController < ApplicationController
     @cart = Cart.find_by(buyer_id:current_buyer.id)
     @items = CartCarry.where(cart_id:@cart.id)
     if @items != nil
+      @order = Order.create(state: "Pending", buyer_id:current_buyer.id)
       @items.each do |item|
         @product_for_this_item = Product.find_by(id: item.product_id)
         if @product_for_this_item.quantity >= item.quantity
+          @store = Store.find_by(id: @product_for_this_item.store_id)
+          @seller = Seller.find_by(store_id: @store.id)
+          @order_items = OrderItem.create(state: "Pending", priceAtBuyTime:@product_for_this_item.currentPrice ,
+           order_id: @order.id, product_id: item.product_id, seller_id:@seller.id,quantity:item.quantity)
+          item.destroy
         else
           redirect_to root_path
           return
         end
       end
 
-      @order = Order.create(state: "Pending", buyer_id:current_buyer.id)
+     # @order = Order.create(state: "Pending", buyer_id:current_buyer.id)
       
-      @items.each do |item|
-        @store = Store.find_by(id: @product_for_this_item.store_id)
-        @seller = Seller.find_by(store_id: @store.id)
-        @order_items = OrderItem.create(state: "Pending", priceAtBuyTime:@product_for_this_item.currentPrice ,
-         order_id: @order.id, product_id: item.product_id, seller_id:@seller.id,quantity:item.quantity)
-        item.destroy
-      end
+      # @items.each do |item|
+      #   puts item.seller_id
+      
+      # end
     end
     respond_to do |format|
         format.html { redirect_to cart_path(:id => Cart.find_by(buyer_id:current_buyer.id).id), notice: "Checked Out" }
