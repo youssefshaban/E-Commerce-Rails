@@ -11,7 +11,7 @@ We will discuss them each one by one in their sections so that being said let's
 # Get started
 
 - Clone the repository 
-- Run `rails bundle install`
+- Run `bundle install`
 - Run `rails db:migrate`
 - Run `rails server`
 - That's it the project is up and running
@@ -64,3 +64,4 @@ We used some gems in our development
 - Carrier wave to store public data (images) of products and handle uploads
 
 we used the command `rails generate scaffold <any name>` to build our project which provided us with the views/controllers/routes/migrations and basic CRUD operations in the controllers 
+
