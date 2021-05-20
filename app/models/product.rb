@@ -3,18 +3,20 @@ class Product < ApplicationRecord
     validates :quantity, presence: true
     validates :currentPrice, presence: true
     validates :description, presence: true
+
     paginates_per 3
 
     has_many :ProductAttachment, dependent: :destroy
-    accepts_nested_attributes_for :ProductAttachment
+    accepts_nested_attributes_for :ProductAttachment #, reject_if: proc { |attributes| attributes['photos'].blank? }
+
     
-    belongs_to :Store , optional: true
+    belongs_to :store 
 
     has_many :CartCarry
     has_many :Cart, through: :CartCarry
 
-    belongs_to :Brand , optional: true
-    belongs_to :Category , optional: true
+    belongs_to :brand 
+    belongs_to :category 
 
     
     has_many :OrderItems

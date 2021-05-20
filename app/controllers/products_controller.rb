@@ -50,12 +50,18 @@ class ProductsController < ApplicationController
   # POST /products or /products.json
 
   def create
-      @product = Product.new(product_params)
+      puts "YOOO"
+      @product = Product.new(product_params)  
       @product.store_id = current_seller.store_id
       respond_to do |format|
         if @product.save
-          params[:product_attachments]['photos'].each do |a|
-                @product_attachments = @product.ProductAttachment.create!(:photo => a,     :product_id => @product.id)
+          unless defined? params[:product_attachments]['photos']
+            @product_attachments = @product.ProductAttachment.create!(:photo => "",     :product_id => @product.id)
+          else
+
+            params[:product_attachments]['photos'].each do |a|
+                  @product_attachments = @product.ProductAttachment.create!(:photo => a,     :product_id => @product.id)
+            end
           end
           format.html { redirect_to @product, notice: "Product was successfully created." }
           format.json { render :show, status: :created, location: @product }
@@ -64,6 +70,8 @@ class ProductsController < ApplicationController
           format.json { render json: @product.errors, status: :unprocessable_entity }
         end
       end
+
+   
   end
 
   # PATCH/PUT /products/1 or /products/1.json

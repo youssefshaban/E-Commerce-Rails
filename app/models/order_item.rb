@@ -1,6 +1,6 @@
 class OrderItem < ApplicationRecord
-    belongs_to :Order , optional: true
-    belongs_to :Product , optional: true 
-    belongs_to :Seller , optional: true
+    belongs_to :order 
+    belongs_to :product 
+    belongs_to :seller 
 
 end

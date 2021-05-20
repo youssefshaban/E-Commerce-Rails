@@ -25,15 +25,17 @@ class StoresController < ApplicationController
   def create
     @store = Store.new(store_params)
     @seller = Seller.find_by(id: seller_store_param[:seller_id])
+    # @store.Seller.where(id: seller_store_param[:seller_id]).update_all(:store_id => @store)
     
-
-
+    Rails.logger.info(@store.inspect)
+    
     # puts "HEEEREEE"
     # puts seller_store_param
     respond_to do |format|
       if @store.save
-          @seller.store_id = @store.id
-          @seller.save
+        @seller.store_id = @store.id
+        @seller.save
+         
         format.html { redirect_to @store, notice: "Store was successfully created." }
         format.json { render :show, status: :created, location: @store }
       else

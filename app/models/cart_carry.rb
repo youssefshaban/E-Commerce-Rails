@@ -1,4 +1,4 @@
 class CartCarry < ApplicationRecord
-    belongs_to :Cart , optional: true
-    belongs_to :Product , optional: true
+    belongs_to :cart 
+    belongs_to :product 
 end
