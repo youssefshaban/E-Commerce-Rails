@@ -25,8 +25,7 @@ class StoresController < ApplicationController
   def create
     @store = Store.new(store_params)
     @seller = Seller.find_by(id: seller_store_param[:seller_id])
-    puts "HEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEE"
-    puts @seller.email
+    
 
 
     # puts "HEEEREEE"
