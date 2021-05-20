@@ -16,7 +16,7 @@
       <imported>true</imported>
       <remarks>$PROJECT_DIR$/config/database.yml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5433/ecommerce_development</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/ecommerce_development</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="Rails E-Commerce-Rails: production" uuid="7036ceb7-db3c-448f-b4ed-46b704a50a3e">

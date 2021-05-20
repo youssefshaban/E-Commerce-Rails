@@ -64,6 +64,10 @@
     <orderEntry type="library" scope="PROVIDED" name="image_processing (v1.12.1, RVM: ruby-2.7.3 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="io-like (v0.3.1, RVM: ruby-2.7.3 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.11.2, RVM: ruby-2.7.3 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="kaminari (v1.2.1, RVM: ruby-2.7.3 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="kaminari-actionview (v1.2.1, RVM: ruby-2.7.3 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="kaminari-activerecord (v1.2.1, RVM: ruby-2.7.3 [global]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="kaminari-core (v1.2.1, RVM: ruby-2.7.3 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="listen (v3.1.5, RVM: ruby-2.7.3 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.9.1, RVM: ruby-2.7.3 [global]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.7.1, RVM: ruby-2.7.3 [global]) [gem]" level="application" />
@@ -141,6 +145,8 @@
         <option value="jbuilder" />
         <option value="job" />
         <option value="js:assets" />
+        <option value="kaminari:config" />
+        <option value="kaminari:views" />
         <option value="mailer" />
         <option value="migration" />
         <option value="model" />
@@ -176,6 +182,8 @@
         <option value="jbuilder" />
         <option value="job" />
         <option value="js:assets" />
+        <option value="kaminari:config" />
+        <option value="kaminari:views" />
         <option value="mailer" />
         <option value="migration" />
         <option value="model" />

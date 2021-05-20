@@ -5,7 +5,6 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
 
-    
     if params[:category]
       @products = Product.cat(params[:category]).order(:created_at).page(params[:page])
     elsif params[:brand]
@@ -13,19 +12,18 @@ class ProductsController < ApplicationController
     elsif params[:store]
       @products = Product.seller(params[:store]).order(:created_at).page(params[:page])
     elsif params[:minprice] || params[:maxprice]
-      @products = Product.price(params[:minprice],params[:maxprice]).order(:currentPrice).page(params[:page])
+      @products = Product.price(params[:minprice], params[:maxprice]).order(:currentPrice).page(params[:page])
       #@products = Product.where(currentPrice:  0..2000)
       puts 'hy'
       #Product.price(params[:price])
     else
       @products = Product.search(params[:search]).order(:created_at).page(params[:page])
     end
-    
+
     # @products = Product.where("category_id = 3")
 
     # puts params[:name]
-    
-    
+
     #@products = Product.all
 
     # @admin = current_seller
@@ -50,17 +48,17 @@ class ProductsController < ApplicationController
   # POST /products or /products.json
 
   def create
-      puts "YOOO"
-      @product = Product.new(product_params)  
-      @product.store_id = current_seller.store_id
-      respond_to do |format|
+    puts "YOOO"
+    @product = Product.new(product_params)
+    @product.store_id = current_seller.store_id
+    respond_to do |format|
+      if params[:product_attachments]
         if @product.save
           unless defined? params[:product_attachments]['photos']
-            @product_attachments = @product.ProductAttachment.create!(:photo => "",     :product_id => @product.id)
+            @product_attachments = @product.ProductAttachment.create!(:photo => "", :product_id => @product.id)
           else
-
             params[:product_attachments]['photos'].each do |a|
-                  @product_attachments = @product.ProductAttachment.create!(:photo => a,     :product_id => @product.id)
+              @product_attachments = @product.ProductAttachment.create!(:photo => a, :product_id => @product.id)
             end
           end
           format.html { redirect_to @product, notice: "Product was successfully created." }
@@ -69,9 +67,12 @@ class ProductsController < ApplicationController
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @product.errors, status: :unprocessable_entity }
         end
+      else
+        format.html { redirect_to new_product_path, notice: "Photo is not found" }
+        format.json { render json: @product.errors, status: :unprocessable_entity}
       end
+    end
 
-   
   end
 
   # PATCH/PUT /products/1 or /products/1.json
@@ -88,7 +89,7 @@ class ProductsController < ApplicationController
   end
 
   # DELETE /products/1 or /products/1.json
-  
+
   def destroy
     @product.destroy
     respond_to do |format|
@@ -101,24 +102,27 @@ class ProductsController < ApplicationController
     @myProducts = Product.where("store_id=#{current_seller.store_id}")
   end
 
-  private 
-  def check_for_store_id
-        puts "HEL:LLLLLOOO"
-        puts current_seller.store_id.nil?
-        if @current_seller.store_id.nil?
-          redirect_to products_url , notice: "You Dont own a store"
-          return
-        end
-  end
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def product_params
-      params.require(:product).permit(:name, :quantity, :currentPrice,  :brand_id ,:category_id , :description , product_attachments_attributes: 
-      %i[id product_id photos])
+  def check_for_store_id
+    puts "HEL:LLLLLOOO"
+    puts current_seller.store_id.nil?
+    if @current_seller.store_id.nil?
+      redirect_to products_url, notice: "You Dont own a store"
+      return
     end
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def product_params
+    params.require(:product).permit(:name, :quantity, :currentPrice, :brand_id, :category_id, :description, product_attachments_attributes:
+      %i[id product_id photos])
+  end
 end
