@@ -1,43 +1,87 @@
 <p id="notice"><%= notice %></p>
+<div class="card mb-5 bg-dark" style="max-width: 100%">
+<% if @product.ProductAttachment.size == 1 %>
+  <div class="row no-gutters">
+    <div class="col-md-5">
+      <% @product.ProductAttachment.each do |image| %>
+        <%= image_tag("#{image.photo}", width: '500', height:'500',class:"rounded")%>
+      <% end %>
+    </div>
+    <div class="col-md-7">
+      <div class="card-body">
+        <h1 class="card-title" style="font-family: 'serif'"><%= @product.name %></h1>
+        <hr>
+        <p class="card-text">
+          <p>
+            <strong>Quantity :</strong>
+            <%= @product.quantity %>
+          </p>
+          <p>
+            <strong>Currentprice :</strong>
+            <%= @product.currentPrice %>
+          </p>
+          <p>
+            <strong>Description :</strong>
+            <%= @product.description %>
+          </p>
+          <p>
+            <strong>Brand :</strong>
+            <%= Brand.find_by(id:@product.brand_id ).name%>
+          </p>
+          <p>
+            <strong>Category :</strong>
+            <%= Category.find_by(id:@product.category_id).name %>
+          </p>
+          <%= link_to 'Add To Cart', new_cart_path(:product => @product.id), class: 'btn btn-success' %>
+          <%= link_to 'Back', products_path, class: 'btn btn-light' %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <% elsif @product.ProductAttachment.size > 1 %>
+    <div class="col-md-12">
+      <div class="card-body">
+        <h1 class="card-title" style="font-family: 'serif'"><%= @product.name %></h1>
+        <hr>
+        <p class="card-text">
+          <p>
+            <strong>Quantity :</strong>
+            <%= @product.quantity %>
+          </p>
+          <p>
+            <strong>Currentprice :</strong>
+            <%= @product.currentPrice %>
+          </p>
+          <p>
+            <strong>Description :</strong>
+            <%= @product.description %>
+          </p>
+          <p>
+            <strong>Brand :</strong>
+            <%= Brand.find_by(id:@product.brand_id ).name%>
+          </p>
+          <p>
+            <strong>Category :</strong>
+            <%= Category.find_by(id:@product.category_id).name %>
+          </p>
+          <%= link_to 'Add To Cart', new_cart_path(:product => @product.id), class: 'btn btn-success' %>
+          <%= link_to 'Back', products_path, class: 'btn btn-light' %>
+        </p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        
+          <% @product.ProductAttachment.each do |image| %>
+          <div class="col-md-4 mb-3">
+            <%= image_tag("#{image.photo}", width: '400', height:'400',class:"rounded")%>
+          </div>
+          <% end %>
+        
+      </div>
+    </div>
+    <% end %>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
-
-<p>
-  <strong>Quantity:</strong>
-  <%= @product.quantity %>
-</p>
-
-<p>
-  <strong>Currentprice:</strong>
-  <%= @product.currentPrice %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<p>
-  <strong>Brand:</strong>
-  <%= Brand.find_by(id:@product.brand_id ).name%>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= Category.find_by(id:@product.category_id).name %>
-</p>
 
 
-
-<% @product.ProductAttachment.each do |image| %>
-   <%= image_tag "#{image.photo}" %>
- <% end %>
-
-
-<%= link_to 'Add To Cart', new_cart_path(:product => @product.id) %> |
-
-<%= link_to 'Edit', edit_product_path(@product) , class: 'btn btn-outline-primary' %> 
-<%= link_to 'Back', products_path , class: 'btn btn-outline-primary' %>

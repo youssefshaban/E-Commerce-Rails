@@ -1,7 +1,11 @@
 class Product < ApplicationRecord
+    validates :name, presence: true
+    validates :quantity, presence: true
+    validates :currentPrice, presence: true
+    validates :description, presence: true
     paginates_per 3
 
-    has_many :ProductAttachment
+    has_many :ProductAttachment, dependent: :destroy
     accepts_nested_attributes_for :ProductAttachment
     
     belongs_to :Store , optional: true
@@ -12,7 +16,7 @@ class Product < ApplicationRecord
     belongs_to :Brand , optional: true
     belongs_to :Category , optional: true
 
-
+    
     has_many :OrderItems
     has_many :Order, through: :OrderItems
 
