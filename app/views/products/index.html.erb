@@ -1,14 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 
+<% if seller_signed_in?%>
 
-
+<%= link_to 'New Product', new_product_path , class: 'btn btn-outline-primary float-start'%>
+<br/>
+<% end %>
+<br/>
 <h1>Products</h1>
 
 
 
 
- <% if buyer_signed_in? %>
+ 
         
           <%= form_tag(products_path, method: :get) do %>
             
@@ -109,7 +113,7 @@
 
 
 
-<% end %>
+
 
 
 
@@ -139,9 +143,5 @@
 
 <br>
 
-<% if seller_signed_in?%>
 
-<%= link_to 'New Product', new_product_path %>
-
-<% end %>
 
