@@ -24,7 +24,7 @@
   </thead>
 
   <tbody>
-    <% @order.OrderItems.each do |item| p = Product.find_by(id:item.id) %>
+    <% @order.OrderItems.each do |item| p = Product.find_by(id:item.product_id) %>
       <tr>
         <td><%= item.id %></td>
         <td><%= p.name %></td>

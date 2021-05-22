@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
        item.OrderItems.each do |i2|
         puts i2.seller_id
         puts current_seller.id
-        if i2.seller_id == current_seller.id
+        if i2.seller_id == current_seller.id 
         @myOrders.push(item)
         end
        end 
@@ -48,10 +48,20 @@ class OrdersController < ApplicationController
      # check if all orders accepted 
      if @OrderState == 1
     @order.update(state:"done")
-     end 
+    @order.OrderItems.each do |item|
+      product = Product.find_by(id:item.product_id)
+        if product.quantity > 0 
+          quantityAfterUpdate = product.quantity - item.quantity 
+          product.update(quantity:quantityAfterUpdate)
+        end 
+      end 
+    end 
+    respond_to do |format|
+      format.html { redirect_to sallerView_url, notice: "accepted successfully " }
+      format.json { head :no_content }
+    end
   end
   def reject 
-    # @items = Product.where(id:@order.OrderItems.ids)
     puts "reject"
     @order = Order.find(params[:id])
     @order.OrderItems.each do |i2|
@@ -60,6 +70,10 @@ class OrdersController < ApplicationController
       end
      end 
     @order.update(state:"done")
+    respond_to do |format|
+      format.html { redirect_to sallerView_url, notice: "rejected successfully " }
+      format.json { head :no_content }
+    end
   end
   # GET /orders/new
   def new

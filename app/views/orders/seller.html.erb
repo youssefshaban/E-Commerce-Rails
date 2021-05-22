@@ -25,8 +25,10 @@
         <td><%= cart.updated_at.strftime("%FT%T") %></td>
         <td><%= cart.created_at.strftime("%FT%T") %></td>
         <td><%= link_to 'Show', cart, class: 'btn btn-outline-info' %></td>
+        <% if cart.state == "Pending" %>
         <td><%= link_to 'Accept' ,sallerAccept_path(:id => cart) ,method: :post,class: 'btn btn-outline-warning'  %></td>
         <td><%= link_to 'Reject' ,sallerReject_path(:id => cart) ,method: :post, data: { confirm: 'Are you sure?' } ,class: 'btn btn-outline-danger'  %></td>
+           <% end %>
       </tr>
     <% end %>
   </tbody>
